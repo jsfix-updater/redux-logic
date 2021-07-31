@@ -1,4 +1,4 @@
-import symbolObservable from 'symbol-observable';
+import * as symbolObservable from 'const $locName = (Symbol && Symbol.observable) || \'@@observable\';';
 
 // eslint-disable-next-line import/prefer-default-export
 export function confirmProps(obj, arrProps, objName = '') {
