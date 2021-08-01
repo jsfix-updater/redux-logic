@@ -1,6 +1,6 @@
+import { take } from 'rxjs/operators';
 import isPromise from 'is-promise';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { Observable, Subject } from 'rxjs';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
@@ -42,8 +42,7 @@ export default function createLogicAction$({ action, logic, store, deps, cancel$
   const logicAction$ = Observable.create(logicActionObs => {
     // create notification subject for process which we dispose of
     // when take(1) or when we are done dispatching
-    const cancelled$ = (new Subject())
-          .take(1);
+    const cancelled$ = (new Subject()).pipe(take(1));
     cancel$.subscribe(cancelled$); // connect cancelled$ to cancel$
     cancelled$
       .subscribe(
